@@ -1,2 +1,0 @@
-# ToursAndTravels_Backend
-# Colab

@@ -21,13 +21,13 @@
                     exit();
                 }
             } else {
-                echo '<script>alert("Invalid Password!!!!");window.location.href = "../Frontend/logincreate/login.html"</script>';
+                echo '<script>alert("Invalid Password!!!!");window.location.href = "../Frontend/logincreate/login.php"</script>';
             }
             
         } else{
-            echo '<script>alert("Invalid Username!!!!");window.location.href = "../Frontend/logincreate/login.html"</script>';
+            echo '<script>alert("Invalid Username!!!!");window.location.href = "../Frontend/logincreate/login.php"</script>';
         }
     } else {
-        echo '<script>alert("Wrong Username Or Password!!!!");window.location.href = "../Frontend/logincreate/login.html"</script>';
+        echo '<script>alert("Wrong Username Or Password!!!!");window.location.href = "../Frontend/logincreate/login.php"</script>';
     }  
 ?>
