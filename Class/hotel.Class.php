@@ -1,11 +1,11 @@
 <?php
 
-include "../connection.php"
+include "connection.php";
 $conn = getConnection();
 class Hotel{
 
     function insertHotel(){
-        $query = "INSERT INTO Hotel() Values()"
+        $query = "INSERT INTO Hotel() Values()";
     }
 
     function updateHotel(){

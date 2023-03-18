@@ -15,7 +15,9 @@
             if (password_verify($password, $user['password'])){
                 $get_role = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM User where Username='$username'"));
                 if ($get_role['Role'] == 'User'){
-                    header("location: ../Frontend/LandingPage/index.php?login=true");
+                    session_start();
+                    $_SESSION['id']= $get_role['UserId'];
+                    header("location: ../Frontend/LandingPage/index.php?login=".$get_role['User_Id']);
                     exit();
                 } else if ($get_role['Role'] == 'Admin'){
                     header("location: ../Frontend/LandingPage/index.php?login=true");
