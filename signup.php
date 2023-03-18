@@ -1,6 +1,6 @@
 <?php
-include "connection.php";
-include "/Class/user.Class.php";
+include ("./Class/connection.php");
+include "./Class/user.Class.php";
 
 $username_pattern = "/^[a-zA-Z0-9]{4,20}$/";
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";

@@ -1,5 +1,6 @@
 <?php
-    include "connection.php";
+    require_once "./Class/connection.php";
+
     if(isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
         $password = $_POST['password'];

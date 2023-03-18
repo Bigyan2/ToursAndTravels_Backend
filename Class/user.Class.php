@@ -1,17 +1,19 @@
 <?php
 
+include "connection.php";
+
 function insertUser($username, $h_password, $email){
-    include "connection.php";
+    Global $conn;
     $insert_query = "INSERT INTO User(Username, Email, Password,Role) VALUES ('$username', '$email', '$h_password','User')";
     if(mysqli_query($conn, $insert_query)){
         echo '<script>alert("Your account has been created.Please login!!!");window.location.href = "../Frontend/logincreate/login.php"</script>';
     } else{
-        echo '<script>alert("Your account cannot be created.Please try again!!!");window.location.href = "../Frontend/logincreate/SignUp.html"</script>';
+        echo '<script>alert("Your account cannot be created.Please try again!!!");</script>';
     }
 }
 
 function insertAdmin($username, $h_password, $email){
-    include "connection.php";
+    Global $conn;
     $insert_query = "INSERT INTO User(Username, Email, Password,Role) VALUES ('$username', '$email', '$h_password','Admin')";
     if(mysqli_query($conn, $insert_query)){
         echo '<script>alert("Admin has been added!!!");window.location.href = "../Frontend/logincreate/login.php"</script>';
@@ -21,24 +23,25 @@ function insertAdmin($username, $h_password, $email){
 }
 
 function updateUser($userID, $username, $h_password, $email){
-    
+    Global $conn;
+    $query = "Update User set where UserId=".$userID;
 }
 
 function deleteUser($user_id){
-
+    $delete_query = "Delete from User where UserId=".$user_id;
 }
 
 
 function fetchUser(){
-    
+    $fetch_query = "Select * from User where Role='User'";
 }
 
 function addAdmin(){
-
+    $insert_query = "Insert into User() Values()";
 }
 
-function deleteAdmin(){
-
+function deleteAdmin($id){
+    $delete_query = "Delete From User where UserId=".$id;
 }
 
 
