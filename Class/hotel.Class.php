@@ -1,7 +1,6 @@
 <?php
-
 include "connection.php";
-$conn = getConnection();
+
 class Hotel{
 
     function insertHotel(){

@@ -15,3 +15,7 @@ desc Hotel;
 create table if not EXISTS Custom_Trek(Trek_id int primary key AUTO_INCREMENT, FromLocation varchar(30), ToLocation varchar(30), NumberOfDays int, Difficulty varchar(20), Status varchar(20));
 
 desc Custom_Trek;
+
+create table if not exists Google_User(id varchar(100) Primary key, Username varchar(50), Email varchar(100), Password varchar(100), Role varchar(50));
+
+desc Google_User;

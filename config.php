@@ -1,6 +1,7 @@
 <?php
+session_start();
 include "google-api/vendor/autoload.php";
-
+include "Class/connection.php";
 $gClient = new Google_Client();
 $gClient->setClientId("305047649813-pv9b9c9bl1s591a2rhqejlth7druufg9.apps.googleusercontent.com");
 $gClient->setClientSecret("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");
@@ -9,4 +10,54 @@ $gClient->setRedirectUri("http://localhost/Tours_Travels/Frontend/logincreate/lo
 $gClient->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");
 
 $login_url = $gClient->createAuthUrl();
+
+if(isset($_GET['code'])){
+
+    $token = $gClient->fetchAccessTokenWithAuthCode($_GET['code']);
+
+    if(!isset($token["error"])){
+
+        $gClient->setAccessToken($token['access_token']);
+
+        // getting profile information
+        $google_oauth = new Google_Service_Oauth2($gClient);
+        $google_account_info = $google_oauth->userinfo->get();
+    
+        // Storing data into database
+        $id = mysqli_real_escape_string($conn, $google_account_info->id);
+        $full_name = mysqli_real_escape_string($conn, trim($google_account_info->name));
+        $email = mysqli_real_escape_string($conn, $google_account_info->email);
+        $profile_pic = mysqli_real_escape_string($conn, $google_account_info->picture);
+
+        // checking user already exists or not
+        $get_user = mysqli_query($conn, "SELECT * From Google_User where id='$id'");
+        if(mysqli_num_rows($get_user) > 0){
+            $_SESSION['id'] = $id; 
+            header("location: ../LandingPage/Index.php");
+            exit;
+        }
+        else{
+
+            // if user not exists we will insert the user
+            $insert = mysqli_query($conn, "INSERT INTO Google_User(id,Username, Email, Password, Role) VALUES('$id', '$full_name', '$email', 'Normal','User')");
+
+            if($insert){
+                $_SESSION['id'] = $id; 
+                header("Location: ../LandingPage/Index.php");
+                exit;
+            }
+            else{
+                echo "Sign up failed!(Something went wrong).";
+            }
+
+        }
+
+    }
+    else{
+        header('Location: ../Frontend/logincreate/login.php');
+        exit;
+    }
+}else{
+    $login_url = $gClient->createAuthUrl();
+}
 ?>
