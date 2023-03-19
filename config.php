@@ -39,7 +39,8 @@ if(isset($_GET['code'])){
         else{
 
             // if user not exists we will insert the user
-            $insert = mysqli_query($conn, "INSERT INTO Google_User(id,Username, Email, Password, Role) VALUES('$id', '$full_name', '$email', 'Normal','User')");
+            $H_pass = password_hash($id, PASSWORD_DEFAULT);
+            $insert = mysqli_query($conn, "INSERT INTO Google_User(id,Username, Email, Password, Role) VALUES('$id', '$full_name', '$email', '$H_pass','User')");
 
             if($insert){
                 $_SESSION['id'] = $id; 
