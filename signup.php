@@ -1,6 +1,7 @@
 <?php
 include ("./Class/connection.php");
 include "./Class/user.Class.php";
+session_start();
 
 $username_pattern = "/^[a-zA-Z0-9]{4,20}$/";
 $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
@@ -13,19 +14,21 @@ $confirm_password = $_POST["confirm_password"];
 $h_password = password_hash($password, PASSWORD_DEFAULT);
 
 if (!preg_match($username_pattern, $username)){
-    echo '<script>alert("Invalid Username. Please try again!!!");window.location.href = "../Frontend/logincreate/signup.html";</script>';
+    $_SESSION['error'] = "Username should contain one uppercase and one number";
 } else if(!preg_match($email_pattern, $email)){
-    echo '<script>alert("Invalid Email Format. Please try again!!!");window.location.href = "../Frontend/logincreate/signup.html"</script>';
+    $_SESSION['error'] = "Invalid Email Format. Please try again!!!";
 } else if(!preg_match($password_pattern,$password)){
-    echo '<script>alert("Invalid Password Format. Please try again!!!");window.location.href = "../Frontend/logincreate/signup.html"</script>';
+    $_SESSION['error'] = "Invalid Password Format. Please try again!!!";
 } else if($password != $confirm_password){
-    echo '<script>alert("Password doesnot matches. Please try again!!!");window.location.href = "../Frontend/logincreate/signup.html"</script>';
+    $_SESSION['error'] = "Password doesnot matches. Please try again!!!";
 } else if(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM User where Username='$username'")) > 0){     
-    echo '<script>alert("Username Already Taken. Please try again!!!");window.location.href = "../Frontend/logincreate/signup.html"</script>';
+    $_SESSION['error'] = "Username Already Taken!!";
 } else if(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM User where Email='$email'")) > 0){
-    echo '<script>alert("Email Already Taken. Please try again!!!");window.location.href = "../Frontend/logincreate/signup.html"</script>';
-} else {
+    $_SESSION['error'] = "Email Already Taken";
+}else{
+    $_SESSION['success'] = "Congratulations!! Your account has been created in";
     insertUser($username, $h_password, $email);
 }
 
+echo '<script>window.location.href = "../Frontend/logincreate/SignUp.php"</script>';
 ?>

@@ -24,28 +24,20 @@ function insertAdmin($username, $h_password, $email){
 
 function updateUser($userID, $username, $h_password, $email){
     Global $conn;
-    $query = "Update User set where UserId=".$userID;
 }
 
 function deleteUser($user_id){
     Global $conn;
-    $delete_query = "Delete from User where UserId=".$user_id;
-    if(mysqli_query($conn, $delete_query)){
-        echo '<script>alert("Admin has been added!!!");</script>;
-    }
 }
 
 function fetchUser(){
     Global $conn;
-    $fetch_query = "Select * from User where Role='User'";
 }
 
 function addAdmin(){
-    $insert_query = "Insert into User() Values()";
 }
 
 function deleteAdmin($id){
-    $delete_query = "Delete From User where UserId=".$id;
 }
 
 ?>
