@@ -6,7 +6,7 @@ function insertUser($username, $h_password, $email){
     Global $conn;
     $insert_query = "INSERT INTO User(Username, Email, Password,Role) VALUES ('$username', '$email', '$h_password','User')";
     if(mysqli_query($conn, $insert_query)){
-        echo '<script>alert("Your account has been created.Please login!!!");window.location.href = "../Frontend/logincreate/login.php"</script>';
+        echo '<script>alert("Your account has been created.Please login!!!");</script>';
     } else{
         echo '<script>alert("Your account cannot be created.Please try again!!!");</script>';
     }

@@ -1,6 +1,6 @@
 <?php
 
-class Package{
+include "../connection.php";
     function insertPackages(){
         $query = "Insert into Package() Values()";
     }
@@ -14,7 +14,10 @@ class Package{
     }
 
     function fetchPackages(){
-        $query = "Select * from Package";
+        GLOBAL $conn;
+        $query = "Select * from Packages";
+        $result = $conn->query($query);
+        return $result;
     }
 
     function fetchCustomizePackages(){
@@ -28,5 +31,5 @@ class Package{
     function approvePackage(){
         $query = "Update CustomPackage set Status='Approved' where CPid=".$id;
     }
-}
+
 ?>

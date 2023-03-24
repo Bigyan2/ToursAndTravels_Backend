@@ -16,11 +16,6 @@ create table if not EXISTS Custom_Package(Package_id int primary key AUTO_INCREM
 
 desc Custom_Trek;
 
-create table if not exists Google_User(id varchar(100) Primary key, Username varchar(50), Email varchar(100), Password varchar(100), Role varchar(50));
-
-desc Google_User;
-
-
 create table if not exists Ratings(RateId int primary key AUTO_INCREMENT, Username varchar(50), Rating int);
 
 desc Ratings;
@@ -34,3 +29,6 @@ create table if not exists Packages(Package_id int primary key AUTO_INCREMENT, P
 desc Packages;
 
 create table if not exists 
+
+
+Insert into Packages(PackageName, PackageTime, PackageLocation, PackageCost, LocationPhoto, Description) VALUES('',5,'Jhapa',6,'','"You will never be able to get enough of Pokhara.” “She told me Pokhara is so beautiful that you will experience a myriad of unforgettable moments. You will never be able to get enough of Pokhara.” “Pokhara has a magical serenity that is not found in any other place!”');

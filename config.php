@@ -30,9 +30,11 @@ if(isset($_GET['code'])){
         $profile_pic = mysqli_real_escape_string($conn, $google_account_info->picture);
 
         // checking user already exists or not
-        $get_user = mysqli_query($conn, "SELECT * From Google_User where id='$id'");
+        $get_user = mysqli_query($conn, "SELECT * From User where Username='$full_name'");
+        $user_info = mysqli_fetch_array($get_user);
         if(mysqli_num_rows($get_user) > 0){
-            $_SESSION['id'] = $id; 
+            $_SESSION['id'] = $user_info['User_Id']; 
+            $_SESSION['ok'] = "Successfully Logged in";
             header("location: ../LandingPage/Index.php");
             exit;
         }
@@ -40,10 +42,13 @@ if(isset($_GET['code'])){
 
             // if user not exists we will insert the user
             $H_pass = password_hash($id, PASSWORD_DEFAULT);
-            $insert = mysqli_query($conn, "INSERT INTO Google_User(id,Username, Email, Password, Role) VALUES('$id', '$full_name', '$email', '$H_pass','User')");
+            $insert = mysqli_query($conn, "INSERT INTO User(Username, Email, Password, Role) VALUES('$full_name', '$email', '$H_pass','User')");
 
             if($insert){
-                $_SESSION['id'] = $id; 
+                $get_user = mysqli_query($conn, "SELECT * From User where Username='$full_name'");
+                $user_info = mysqli_fetch_array($get_user);
+                $_SESSION['id'] = $user_info['User_Id']; 
+                $_SESSION['ok'] = "Successfully Logged in";
                 header("Location: ../LandingPage/Index.php");
                 exit;
             }
