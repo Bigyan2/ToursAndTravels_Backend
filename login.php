@@ -1,5 +1,5 @@
 <?php
-    include "Class/connection.php";
+    include "connection.php";
 
     if(isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
@@ -16,22 +16,22 @@
                 if ($user['Role'] == 'User'){
                     $_SESSION['id'] = $user['User_Id']; 
                     $_SESSION['ok'] = "Successfully logged in";
-                    header("location: ../Frontend/LandingPage/Index.php");
+                    header("location: ../Index.php");
                     exit();
                 } else if ($user['Role'] == 'Admin'){
                     $_SESSION['id'] = $user['User_Id'];
                     $_SESSION['ok'] = "Successfully logged in";
-                    header("location: ../Frontend/LandingPage/Index.php");
+                    header("location: ../Index.php");
                     exit();
                 }
             } else {
                 $_SESSION['error'] = "Invalid Password";
-                echo '<script>window.location.href = "../Frontend/logincreate/login.php";</script>';
+                echo '<script>window.location.href = "../login.php";</script>';
             }
             
         } else{
             $_SESSION['error'] = "Invalid Password";
-            echo '<script>window.location.href = "../Frontend/logincreate/login.php";</script>';
+            echo '<script>window.location.href = "../login.php";</script>';
         }
     }
 ?>
