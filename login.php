@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "connection.php";
 
     if(isset($_POST['username']) && isset($_POST['password'])){
@@ -11,7 +12,6 @@
         if (mysqli_num_rows($result) > 0){
 
             $user = mysqli_fetch_assoc($result);
-            session_start();
             if (password_verify($password, $user['password'])){
                 if ($user['Role'] == 'User'){
                     $_SESSION['id'] = $user['User_Id']; 
@@ -21,7 +21,7 @@
                 } else if ($user['Role'] == 'Admin'){
                     $_SESSION['id'] = $user['User_Id'];
                     $_SESSION['ok'] = "Successfully logged in";
-                    header("location: ../Index.php");
+                    header("location: Admin/dashboard.php");
                     exit();
                 }
             } else {
@@ -30,7 +30,7 @@
             }
             
         } else{
-            $_SESSION['error'] = "Invalid Password";
+            $_SESSION['error'] = "Invalid Username";
             echo '<script>window.location.href = "../login.php";</script>';
         }
     }

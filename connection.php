@@ -9,7 +9,4 @@
 	if (!$conn) {
 		echo "Databse connection failed!!";
 	} 
-
-
-
   ?>

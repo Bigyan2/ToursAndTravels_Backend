@@ -3,8 +3,8 @@ session_start();
 include "google-api/vendor/autoload.php";
 include "connection.php";
 $gClient = new Google_Client();
-$gClient->setClientId("305047649813-pv9b9c9bl1s591a2rhqejlth7druufg9.apps.googleusercontent.com");
-$gClient->setClientSecret("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");
+$gClient->setClientId("305047649813-9ftmc01ts2r8jpruvq7ni3c69kn1jhve.apps.googleusercontent.com");
+$gClient->setClientSecret("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");
 $gClient->setApplicationName("Tours and travels Login");
 $gClient->setRedirectUri("http://localhost/Tours_Travels/Frontend/logincreate/login.php");
 $gClient->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");
@@ -35,7 +35,7 @@ if(isset($_GET['code'])){
         if(mysqli_num_rows($get_user) > 0){
             $_SESSION['id'] = $user_info['User_Id']; 
             $_SESSION['ok'] = "Successfully Logged in";
-            header("location: ../LandingPage/Index.php");
+            header("location: ../index.php");
             exit;
         }
         else{
@@ -49,7 +49,7 @@ if(isset($_GET['code'])){
                 $user_info = mysqli_fetch_array($get_user);
                 $_SESSION['id'] = $user_info['User_Id']; 
                 $_SESSION['ok'] = "Successfully Logged in";
-                header("Location: ../LandingPage/Index.php");
+                header("Location: ../index.php");
                 exit;
             }
             else{
@@ -60,7 +60,7 @@ if(isset($_GET['code'])){
 
     }
     else{
-        header('Location: ../Frontend/logincreate/login.php');
+        header('Location: ../login.php');
         exit;
     }
 }else{
