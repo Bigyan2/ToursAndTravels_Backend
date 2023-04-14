@@ -21,7 +21,7 @@
                 } else if ($user['Role'] == 'Admin'){
                     $_SESSION['id'] = $user['User_Id'];
                     $_SESSION['ok'] = "Successfully logged in";
-                    header("location: Admin/dashboard.php");
+                    header("location: ../Admin/dashboard.php");
                     exit();
                 }
             } else {

@@ -1,22 +1,23 @@
 <?php 
-require_once "../../Backend/connection.php";
+require_once "../connection.php";
 
-$id = $_GET['id'];
-if(isset($_POST['submit'])){
-    $location = $_POST['location']; 
-    $package = $_POST['Package'];
-    $image = $_POST['image'];
-    $days = $_POST['days'];
+if (isset($_POST['submit'])){
+    $id=$_POST['id'];
+    $package_name = $_POST['package-name'];
+    $days = $_POST['total-days'];
+    $link = $_POST['image-link'];
+    $location = $_POST['location'];
     $rating = $_POST['rating'];
     $price = $_POST['price'];
     $difficulty = $_POST['difficulty'];
-    
-    $query = "UPDATE Package set PackageName='$package' Days=$days LocationName='$location' ImageLink= '$image' Rating=$rating Price=$price Difficulty='$difficulty' where Package_id=$id";
-    $result = mysqli_query($conn, $query);
-    if ($result){
-        echo '<script>alert("Updated successfully");window.location.href="../../Admin/customPackage.php"</script>';
+    $about = $_POST['about'];
+    $Itinerary = $_POST['itinerary'];
+
+    $query = "UPDATE Package SET PackageName ='$package_name', Days = $days , LocationName ='$location', ImageLink ='$link', Rating =$rating, Price =$price, Difficulty ='$difficulty', About ='$about', Itinerary ='$Itinerary' WHERE Package_id=$id";
+    if (mysqli_query($conn, $query)){
+        session_start();
+        $_SESSION['mssg'] = "Package Updated Successfully";
+        echo '<script>window.location.href="../../Admin/Package.php";</script>';
     }
-} else {
-    echo "Not submitted";
 }
 ?>

@@ -16,11 +16,12 @@
 
     }
 
-    function addRatings(){
+    function addFeedbacks(){
         
     }
 
     function addBookings(){
         
     }
+
 ?>
