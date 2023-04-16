@@ -12,5 +12,5 @@ if ($approve=="yes"){
     mysqli_query($conn, $sql);
     $_SESSION['mssg'] = "Package is Rejected";
 }
-header('location: ../../Admin/Package.php');
+header('location: ../../Admin/dashboard.php');
 ?>

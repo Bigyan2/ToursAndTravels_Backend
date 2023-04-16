@@ -1,9 +1,9 @@
 <?php
     include "connection.php";
 
-    function addCustomPackages($fromLocation,$toLocation,$DateFrom,$DateTo,$email,$children,$adult,$phone){
+    function addCustomPackages($fromLocation,$toLocation,$DateFrom,$DateTo,$email,$children,$adult,$phone,$id){
         GLOBAL $conn;
-        $query = "INSERT INTO CustomPackage(Email, UserId,FromLocation, ToLocation, StartDate, EndDate, AdultNumber, ChildrenNumber, PhoneNumber) Values('".$email."',".$_SESSION['id'].",'".$fromLocation."','".$toLocation."','".$DateFrom."','".$DateTo."',".$adult.",".$children.",".$phone.")";
+        $query = "INSERT INTO CustomPackage(User_Id,TripFrom, TripTo, DateFrom,DateTo, Email, Children, Adult, Phone) Values($id,'$fromLocation.','$toLocation','$DateFrom','$DateTo','$email' ,$children, $adult, $phone)";
         $insert = mysqli_query($conn,$query);
         if($insert){
             echo '<script>alert("Inserted Successfully");window.location.href = "suggestionLocation.php"</script>';

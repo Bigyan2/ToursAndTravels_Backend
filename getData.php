@@ -21,7 +21,7 @@
 
     function fetchCustomPacakge(){
         GLOBAL $conn;
-        $query = "Select * from CustomPackage JOIN User ON CustomPackage.UserId = User.User_Id";
+        $query = "Select * from CustomPackage JOIN User ON CustomPackage.User_Id = User.User_Id";
         $result = mysqli_query($conn,$query);
         if($result){
             return $result;

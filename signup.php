@@ -15,7 +15,7 @@ if(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM User where Username='$user
     $insert_query = "INSERT INTO User(Username, Email, Password,Role) VALUES ('$username', '$email', '$h_password','User')";
     if(mysqli_query($conn, $insert_query)){
         $_SESSION['success'] = "Congratulations!! Your account has been created in";
-        echo '<script>window.location.href = "../login.php"</script>';
+        echo '<script>window.location.href = "../Login.php"</script>';
     }
 }
 echo '<script>window.location.href = "../signup.php"</script>';
