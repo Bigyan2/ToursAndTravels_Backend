@@ -10,27 +10,43 @@
         }
     }
 
-    function fetchUserData(){
+    function fetchPackageById($id){
         GLOBAL $conn;
-        $query = "Select * from User";
+        $query = "Select * from Package where Package_id=$id";
         $result = mysqli_query($conn,$query);
         if($result){
             return $result;
         }
     }
-
-    function fetchCustomPacakge(){
+    function fetchUserData($id){
         GLOBAL $conn;
-        $query = "Select * from CustomPackage JOIN User ON CustomPackage.User_Id = User.User_Id";
+        $query = "Select * from User where User_Id=$id";
+        $result = mysqli_query($conn,$query);
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    }
+
+    function fetchCustomPacakge($id){
+        GLOBAL $conn;
+        $query = "Select * from CustomPackage JOIN User ON CustomPackage.User_Id = User.User_Id where CustomPackage.User_Id=$id";
         $result = mysqli_query($conn,$query);
         if($result){
             return $result;
         }
     }
     
-    function fetchBookings(){
+    function fetchBookings($id){
         GLOBAL $conn;
-        $query = "SELECT * FROM Bookings JOIN User ON Bookings.User_Id = User.User_Id  JOIN Package ON Bookings.Package_id = Package.Package_id";
+        $query = "SELECT * FROM Bookings JOIN User ON Bookings.User_Id = User.User_Id  JOIN Package ON Bookings.Package_id = Package.Package_id where Bookings.User_Id=$id";
+        $result = mysqli_query($conn,$query);
+        if($result){
+            return $result;
+        }
+    }
+
+    function fetchHotels(){
+        GLOBAL $conn;
+        $query = "SELECT * FROM hotel";
         $result = mysqli_query($conn,$query);
         if($result){
             return $result;
@@ -47,16 +63,23 @@
     }
 
     function getRatings(){
-
+        GLOBAL $conn;
+        $query = "SELECT * FROM Rating";
+        $result = mysqli_query($conn,$query);
+        if(mysqli_num_rows($result)>0){
+            return $result;
+        } else {
+            return false;
+        }
     }
 
-    function BookingForButton(){
+    function check_if_user_has_booked($id, $packId){
         GLOBAL $conn;
-        $query = "SELECT * FROM Bookings WHERE BookingId=$id";
+        $query = "SELECT * FROM Bookings WHERE User_Id=$id AND Package_id=$packId";
         $result = mysqli_query($conn,$query);
-        if($result){
-            return $result;
-        }
+        if($row=mysqli_fetch_assoc($result)){
+            return $row['status'];
+        } 
     }
 
 
@@ -66,5 +89,38 @@
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
         return $row;
+    }
+
+    function fetchBookingsById($id){
+        GLOBAL $conn;
+        $query = "SELECT * FROM Bookings JOIN Package ON Package.Package_id = Bookings.Package_id where User_Id=$id";
+        $result = mysqli_query($conn, $query);
+        return $result;
+    }
+
+    function fetchCustomizedById($id){
+        GLOBAL $conn;
+        $query = "SELECT * FROM CustomPackage where User_Id=$id ";
+        $result = mysqli_query($conn, $query);
+        return $result;
+    }
+
+    function fetchHotelByid($id){
+        GLOBAL $conn;
+        $query = "SELECT * FROM hotel where HotelId=$id";
+        $result = mysqli_query($conn,$query);
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    }
+
+    function checkToken($token){
+        GLOBAL $conn;
+        $query = "SELECT * FROM User where token='$token'";
+        $result = mysqli_query($conn, $query);
+        if($result){
+            return true;
+        } else {
+            return false;
+        }
     }
 ?>

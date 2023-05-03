@@ -1,20 +1,20 @@
 <?php 
 require_once "../../Backend/connection.php";
 
-$id = $_GET['id'];
 if(isset($_POST['submit'])){
-    $location = $_POST['location']; 
-    $package = $_POST['Package'];
-    $image = $_POST['image'];
-    $days = $_POST['days'];
-    $rating = $_POST['rating'];
-    $price = $_POST['price'];
-    $difficulty = $_POST['difficulty'];
-    
-    $query = "UPDATE Package set PackageName='".$package."' Days=$days LocationName='".$location."' ImageLink= '".$image."' Rating=$rating Price=$price Difficulty='".$difficulty."' where Package_id=$id";
+    $id = $_POST['id'];
+    $name = $_POST['hotel-name'];
+    $location  = $_POST['location'];
+    $imagelink = $_POST['image-link'];
+    $description = $_POST['about'];
+    $price = $_POST['hotel-price'];
+
+    $query = "UPDATE Hotel Set HotelName='$name', HotelLocation='$location', HotelImage='$imagelink', HotelDescription='$description', HotelPrice=$price where HotelId=$id";
     $result = mysqli_query($conn, $query);
     if ($result){
-        echo '<script>alert("Updated successfully");window.location.href="../../Admin/customPackage.php"</script>';
+        session_start();
+        $_SESSION['mssg'] = "Hotel Updated Successfully";
+        echo '<script>window.location.href="../../Admin/hotel.php"</script>';
     }
 } else {
     echo "Not submitted";

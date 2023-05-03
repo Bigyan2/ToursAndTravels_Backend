@@ -12,8 +12,10 @@ if (isset($_POST['submit'])){
     $difficulty = $_POST['difficulty'];
     $about = $_POST['about'];
     $Itinerary = $_POST['itinerary'];
+    $transportation = $_POST['transportation'];
+    $accomodation = $_POST['accomodation'];
 
-    $query = "UPDATE Package SET PackageName ='$package_name', Days = $days , LocationName ='$location', ImageLink ='$link', Rating =$rating, Price =$price, Difficulty ='$difficulty', About ='$about', Itinerary ='$Itinerary' WHERE Package_id=$id";
+    $query = "UPDATE Package SET PackageName ='$package_name', Days = $days , LocationName ='$location', ImageLink ='$link', Rating =$rating, Price =$price, Difficulty ='$difficulty', Transportation = '$transportation', Accomodation='$accomodation', About ='$about', Itinerary ='$Itinerary' WHERE Package_id=$id";
     if (mysqli_query($conn, $query)){
         session_start();
         $_SESSION['mssg'] = "Package Updated Successfully";
