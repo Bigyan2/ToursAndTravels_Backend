@@ -14,6 +14,14 @@
 
     function addRating($rate, $id){
         GLOBAL $conn;
+
+        $checkQuery = "SELECT * FROM Rating WHERE User_Id = $id";
+        $checkResult = mysqli_query($conn, $checkQuery);
+
+        if(mysqli_num_rows($checkResult) > 0){
+            return false;
+        }
+        
         $query = "INSERT INTO Rating(User_Id, Ratings) VALUES($id, $rate)";
         $insert = mysqli_query($conn,$query);
         if($insert){
@@ -56,15 +64,33 @@
         }
     }
 
-    function updateUser($id, $username, $email){
+    function updateUsername($id, $username){
         GLOBAL $conn;
-        $query = "UPDATE User Set Username='$username', Email='$email' WHERE User_Id=$id";
+        $checkQ = "SELECT * FROM User where Username='$username'";
+        if(mysqli_num_rows(mysqli_query($conn, $checkQ))){
+            return false;
+        } else {
+        $query = "UPDATE User Set Username='$username' WHERE User_Id=$id";
         $insert = mysqli_query($conn,$query);
         if($insert){
             return true;
-        } else {
-            return false;
+            }
         }
+    }
+
+    function updateEmail($id, $email){
+        GLOBAL $conn;
+        $checkQ = "SELECT * FROM User where Email='$email'";
+        if(mysqli_num_rows(mysqli_query($conn, $checkQ))){
+            return false;
+        } else {
+            $query = "UPDATE User Set Email='$email' WHERE User_Id=$id";
+            $insert = mysqli_query($conn,$query);
+            if($insert){
+                return true;
+        }
+        }
+
     }
 
     function updatePassword($id, $old_password, $new_password){

@@ -8,8 +8,9 @@ if(isset($_POST['submit'])){
     $imagelink = $_POST['image-link'];
     $price = $_POST['hote-price'];
     $description = $_POST['about'];
+    $contact = $_POST['contact'];
 
-    $query = "INSERT INTO Hotel(HotelName, HotelLocation, HotelImage, HotelPrice,HotelDescription) VALUES('$name', '$location', '$imagelink',$price, '$description')";
+    $query = "INSERT INTO Hotel(HotelName, HotelLocation, HotelImage, HotelPrice,HotelDescription,Contact) VALUES('$name', '$location', '$imagelink',$price, '$description',$contact)";
     $result = mysqli_query($conn, $query);
     if ($result){
         session_start();

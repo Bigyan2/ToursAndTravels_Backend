@@ -8,8 +8,9 @@ if(isset($_POST['submit'])){
     $imagelink = $_POST['image-link'];
     $description = $_POST['about'];
     $price = $_POST['hotel-price'];
+    $contact = $_POST['contact'];
 
-    $query = "UPDATE Hotel Set HotelName='$name', HotelLocation='$location', HotelImage='$imagelink', HotelDescription='$description', HotelPrice=$price where HotelId=$id";
+    $query = "UPDATE Hotel Set HotelName='$name', HotelLocation='$location', HotelImage='$imagelink', HotelDescription='$description', HotelPrice=$price, Contact = $contact where HotelId=$id";
     $result = mysqli_query($conn, $query);
     if ($result){
         session_start();

@@ -20,7 +20,7 @@
                     header("location: ../index.php");
                     exit();
                 } else if ($user['Role'] == 'Admin'){
-                    $_SESSION['id'] = $user['User_Id'];
+                    $_SESSION['idz'] = $user['User_Id'];
                     $_SESSION['ok'] = "Successfully logged in";
                     header("location: ../Admin/dashboard.php");
                     exit();

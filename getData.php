@@ -35,9 +35,9 @@
         }
     }
     
-    function fetchBookings($id){
+    function fetchBookings(){
         GLOBAL $conn;
-        $query = "SELECT * FROM Bookings JOIN User ON Bookings.User_Id = User.User_Id  JOIN Package ON Bookings.Package_id = Package.Package_id where Bookings.User_Id=$id";
+        $query = "SELECT * FROM Bookings JOIN User ON Bookings.User_Id = User.User_Id  JOIN Package ON Bookings.Package_id = Package.Package_id";
         $result = mysqli_query($conn,$query);
         if($result){
             return $result;
@@ -53,24 +53,30 @@
         }
     }
     
+    function fetchFeedbackById($id){
+        GLOBAL $conn;
+        $query = "SELECT * FROM Feedback  where User_Id=$id AND status='approved'";
+        $result = mysqli_query($conn,$query);
+        if(mysqli_num_rows($result) == 0){
+            return "No Feedbacks";
+        } else {
+            $row = mysqli_fetch_assoc($result);
+            return $row['Feed'];
+        }
+    }
+
     function fetchFeedbacks(){
         GLOBAL $conn;
         $query = "SELECT * FROM Feedback JOIN User ON Feedback.User_Id = User.User_Id";
         $result = mysqli_query($conn,$query);
-        if($result){
-            return $result;
-        }
+        return $result;
     }
 
-    function getRatings(){
+    function fetchRatings(){
         GLOBAL $conn;
-        $query = "SELECT * FROM Rating";
+        $query = "SELECT * FROM Rating JOIN User ON Rating.User_Id = User.User_Id";
         $result = mysqli_query($conn,$query);
-        if(mysqli_num_rows($result)>0){
-            return $result;
-        } else {
-            return false;
-        }
+        return $result;
     }
 
     function check_if_user_has_booked($id, $packId){
@@ -98,9 +104,9 @@
         return $result;
     }
 
-    function fetchCustomizedById($id){
+    function fetchCustomizedPackage(){
         GLOBAL $conn;
-        $query = "SELECT * FROM CustomPackage where User_Id=$id ";
+        $query = "Select * from CustomPackage JOIN User ON CustomPackage.User_Id = User.User_Id";
         $result = mysqli_query($conn, $query);
         return $result;
     }
